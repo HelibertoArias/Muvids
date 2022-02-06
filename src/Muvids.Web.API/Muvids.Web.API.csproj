@@ -24,6 +24,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Muvids.Application\Muvids.Application.csproj" />
+    <ProjectReference Include="..\Muvids.Identity\Muvids.Identity.csproj" />
+    <ProjectReference Include="..\Muvids.Infrastructure\Muvids.Infrastructure.csproj" />
+    <ProjectReference Include="..\Muvids.Persistence\Muvids.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

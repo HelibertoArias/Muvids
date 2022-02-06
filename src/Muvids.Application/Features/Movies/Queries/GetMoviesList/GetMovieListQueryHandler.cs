@@ -5,7 +5,7 @@ using Muvids.Domain.Entities;
 
 namespace Muvids.Application.Features.Movies.Queries.GetMoviesList;
 
-public class GetMovieListQueryHandler : IRequestHandler<GetMovieListQuery, IEnumerable<MovieListVm>>
+public class GetMovieListQueryHandler : IRequestHandler<GetMovieListQuery, List<MovieListVm>>
 {
     private readonly IMapper _mapper;
 
@@ -18,7 +18,7 @@ public class GetMovieListQueryHandler : IRequestHandler<GetMovieListQuery, IEnum
         this._movieRepository = movieRepository ?? throw new ArgumentNullException(nameof(movieRepository));
     }
 
-    public async Task<IEnumerable<MovieListVm>> Handle(GetMovieListQuery request,
+    public async Task<List<MovieListVm>> Handle(GetMovieListQuery request,
                                                         CancellationToken cancellationToken)
     {
         var allEvents = (await _movieRepository.ListAllAsync()).OrderBy(x => x.Title);

@@ -20,7 +20,14 @@ public static class IdentityServiceExtensions
     {
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
-        services.AddDbContext<MuvidsIdentityDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("GloboTicketIdentityConnectionString"),
+        var stringConnection = "MuvidsIdentityConnectionString";
+        var connectionConfiguration = configuration.GetConnectionString(stringConnection);
+        if (connectionConfiguration == null)
+        {
+            throw new ArgumentNullException( nameof(connectionConfiguration), $"{stringConnection} doesn't exist in your appsetings.json");
+        }
+
+        services.AddDbContext<MuvidsIdentityDbContext>(options => options.UseSqlServer(connectionConfiguration,
             b => b.MigrationsAssembly(typeof(MuvidsIdentityDbContext).Assembly.FullName)));
 
         services.AddIdentity<ApplicationUser, IdentityRole>()

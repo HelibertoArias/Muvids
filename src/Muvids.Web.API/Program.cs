@@ -1,16 +1,29 @@
 using Microsoft.OpenApi.Models;
+using Muvids.Application;
+using Muvids.Application.Contracts;
+using Muvids.Identity;
+using Muvids.Infrastructure;
+using Muvids.Persistence;
 using Muvids.Web.API.Helpers;
+using Muvids.Web.API.Services;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddSerilog();
 
+IConfiguration configuration = builder.Configuration;
 
 // Add services to the container.
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(configuration);
+builder.Services.AddPersistenceServices(configuration);
+builder.Services.AddIdentityServices(configuration);
 
+builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddEndpointsApiExplorer();
