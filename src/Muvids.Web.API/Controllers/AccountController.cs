@@ -15,6 +15,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("authenticate", Name = "authenticate")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<AuthenticationResponse>> Authenticate(AuthenticationRequest request)
     {
         return Ok(await _authenticationService.AuthenticateAsync(request));

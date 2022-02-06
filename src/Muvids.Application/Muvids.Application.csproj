@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Muvids.Domain\Muvids.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Movies\Commands\" />
-  </ItemGroup>
-
 </Project>

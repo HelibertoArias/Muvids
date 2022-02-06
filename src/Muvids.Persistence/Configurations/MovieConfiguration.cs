@@ -8,8 +8,11 @@ public class MovieConfiguration : IEntityTypeConfiguration<Movie>
 {
     public void Configure(EntityTypeBuilder<Movie> builder)
     {
+        builder.Property(x => x.Id);
         builder.Property(x => x.Title)
             .IsRequired()
             .HasMaxLength(50);
+
+        
     }
 }

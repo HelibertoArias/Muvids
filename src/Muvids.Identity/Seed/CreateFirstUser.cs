@@ -15,13 +15,14 @@ public static class CreateFirstUser
             LastName = "Arias",
             UserName = "helibertoarias",
             Email = "helibertoarias@gmail.com",
-            EmailConfirmed = true
+            EmailConfirmed = true,
+            
         };
 
         var user = await userManager.FindByEmailAsync(applicationUser.Email);
         if (user == null)
         {
-            await userManager.CreateAsync(applicationUser, "P4ss");
+            await userManager.CreateAsync(applicationUser, "P4assword@1");
         }
     }
 }

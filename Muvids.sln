@@ -32,11 +32,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5FC0B1FF-0553-4C5F-8422-C26FC2313814}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Notes.txt = Notes.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muvids.Web.API.IntegrationTest", "test\Muvids.Web.API.IntegrationTest\Muvids.Web.API.IntegrationTest.csproj", "{36A35F9E-C528-4AC1-B334-952826694FFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Muvids.Web.API.IntegrationTest", "test\Muvids.Web.API.IntegrationTest\Muvids.Web.API.IntegrationTest.csproj", "{36A35F9E-C528-4AC1-B334-952826694FFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muvids.Persistence", "test\Muvids.Persistence\Muvids.Persistence.csproj", "{2B6577C8-159A-40DB-9F89-FF6A109CCBAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Muvids.Persistence", "test\Muvids.Persistence\Muvids.Persistence.csproj", "{2B6577C8-159A-40DB-9F89-FF6A109CCBAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

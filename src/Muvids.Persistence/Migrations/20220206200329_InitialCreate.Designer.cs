@@ -12,8 +12,8 @@ using Muvids.Persistence;
 namespace Muvids.Persistence.Migrations
 {
     [DbContext(typeof(MuvidsDbContext))]
-    [Migration("20220206035154_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220206200329_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,6 @@ namespace Muvids.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastModifiedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModifiedDate")
@@ -66,21 +65,6 @@ namespace Muvids.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Movies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("a7f8c400-1f0b-4b45-83ce-5eef8ebb3641"),
-                            CreatedBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedDate = new DateTime(2022, 2, 5, 22, 51, 54, 730, DateTimeKind.Local).AddTicks(6161),
-                            Description = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
-                            IsPublic = true,
-                            LastModifiedBy = "00000000-0000-0000-0000-000000000000",
-                            LastModifiedDate = new DateTime(2022, 2, 5, 22, 51, 54, 730, DateTimeKind.Local).AddTicks(6169),
-                            Rating = "PG-13",
-                            ReleaseYear = 2010,
-                            Title = "Inception"
-                        });
                 });
 #pragma warning restore 612, 618
         }
