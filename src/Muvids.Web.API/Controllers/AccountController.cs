@@ -25,4 +25,6 @@ public class AccountController : ControllerBase
     {
         return Ok(await _authenticationService.RegisterAsync(request));
     }
+
+
 }

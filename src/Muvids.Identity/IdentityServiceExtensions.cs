@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +32,14 @@ public static class IdentityServiceExtensions
         services.AddDbContext<MuvidsIdentityDbContext>(options => options.UseSqlServer(connectionConfiguration,
             b => b.MigrationsAssembly(typeof(MuvidsIdentityDbContext).Assembly.FullName)));
 
-        services.AddIdentity<ApplicationUser, IdentityRole>()
+        services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+           {
+               options.Password.RequiredLength = 10;
+               options.Password.RequireLowercase = false;
+               options.Password.RequireUppercase = false;
+               options.Password.RequireNonAlphanumeric = false;
+               options.Password.RequireDigit = false;
+           })
             .AddEntityFrameworkStores<MuvidsIdentityDbContext>().AddDefaultTokenProviders();
 
         services.AddTransient<IAuthenticationService, AuthenticationService>();

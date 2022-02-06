@@ -19,6 +19,6 @@ public class RegistrationRequest
     public string UserName { get; set; } = null!;
 
     [Required]
-    [MinLength(6)]
+    [MinLength(10)]
     public string Password { get; set; } = null!;
 }
