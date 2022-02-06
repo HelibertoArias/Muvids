@@ -16,7 +16,7 @@ public class MoviesController : ControllerBase
         this._mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
-    [HttpGet]
+    [HttpGet("all", Name = "GetAllMovies")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAllMovies()
     {

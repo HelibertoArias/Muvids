@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using Muvids.Application;
 using Muvids.Application.Contracts;
-using Muvids.Identity;
+ 
+using Muvids.Identity.Models;
 using Muvids.Infrastructure;
 using Muvids.Persistence;
 using Muvids.Web.API.Helpers;
+using Muvids.Web.API.Middleware;
 using Muvids.Web.API.Services;
 using Serilog;
 
@@ -27,7 +30,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+ 
 
 // START Swagger
 // https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio
@@ -100,6 +103,10 @@ if (app.Environment.IsDevelopment())
 
     app.UseDeveloperExceptionPage();
 }
+ 
+    // https://andrewlock.net/creating-a-custom-error-handler-middleware-function/
+    app.UseCustomExceptionHandler();
+ 
 
 app.UseHttpsRedirection();
 
@@ -107,4 +114,21 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+try
+{
+    var userManager = app.Services.GetRequiredService<UserManager<ApplicationUser>>();
+
+    await Muvids.Identity.Seed.CreateFirstUser.SeedAsync(userManager);
+    Log.Information("Application Starting");
+}
+catch (Exception ex)
+{
+    Log.Warning(ex, "An error occured while starting the application");
+}
+
 app.Run();
+
+
+// https://stackoverflow.com/questions/69058176/how-to-use-webapplicationfactory-in-net6-without-speakable-entry-point
+//<ItemGroup> < InternalsVisibleTo Include = "Muvids.Web.API.IntegrationTest" /> </ ItemGroup >
+public partial class Program { } // so you can reference it from tests

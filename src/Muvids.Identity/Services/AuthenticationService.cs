@@ -82,7 +82,7 @@ public class AuthenticationService : IAuthenticationService
             var result = await _userManager.CreateAsync(user, request.Password);
 
             return result.Succeeded ? new RegistrationResponse() { UserId = user.Id }
-                                    : throw new Exception($"{result.Errors}");
+                                    : throw new Exception($"{result.ToString()}");
         }
         else
         {

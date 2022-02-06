@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿ 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +11,8 @@ using Muvids.Identity.Models;
 using Newtonsoft.Json;
 using System;
 using System.Text;
+using Muvids.Identity.Services;
+using Muvids.Application.Contracts.Identity;
 
 namespace Muvids.Identity;
 
@@ -24,7 +26,7 @@ public static class IdentityServiceExtensions
         var connectionConfiguration = configuration.GetConnectionString(stringConnection);
         if (connectionConfiguration == null)
         {
-            throw new ArgumentNullException( nameof(connectionConfiguration), $"{stringConnection} doesn't exist in your appsetings.json");
+            throw new ArgumentNullException(nameof(connectionConfiguration), $"{stringConnection} doesn't exist in your appsetings.json");
         }
 
         services.AddDbContext<MuvidsIdentityDbContext>(options => options.UseSqlServer(connectionConfiguration,

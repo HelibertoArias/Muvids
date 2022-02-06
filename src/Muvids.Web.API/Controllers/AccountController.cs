@@ -14,14 +14,14 @@ public class AccountController : ControllerBase
         _authenticationService = authenticationService;
     }
 
-    [HttpPost("authenticate")]
-    public async Task<ActionResult<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request)
+    [HttpPost("authenticate", Name = "authenticate")]
+    public async Task<ActionResult<AuthenticationResponse>> Authenticate(AuthenticationRequest request)
     {
         return Ok(await _authenticationService.AuthenticateAsync(request));
     }
 
-    [HttpPost("register")]
-    public async Task<ActionResult<RegistrationResponse>> RegisterAsync(RegistrationRequest request)
+    [HttpPost("register", Name = "register")]
+    public async Task<ActionResult<RegistrationResponse>> Register( RegistrationRequest request)
     {
         return Ok(await _authenticationService.RegisterAsync(request));
     }

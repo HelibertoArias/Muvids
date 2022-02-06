@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Muvids.Identity.Seed;
 
-public class CreateFirstUser
+public static class CreateFirstUser
 {
     public static async Task SeedAsync(UserManager<ApplicationUser> userManager)
     {

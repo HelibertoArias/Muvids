@@ -48,6 +48,7 @@ public class ExceptionHandlerMiddleware
                 break;
             case Exception ex:
                 httpStatusCode = HttpStatusCode.BadRequest;
+                result = ex.Message;
                 break;
         }
 
