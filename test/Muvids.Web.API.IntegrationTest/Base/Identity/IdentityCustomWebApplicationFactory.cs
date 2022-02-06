@@ -18,6 +18,7 @@ public class IdentityCustomWebApplicationFactory<TStartup>
     {
         return CreateClient();
     }
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureServices(services =>

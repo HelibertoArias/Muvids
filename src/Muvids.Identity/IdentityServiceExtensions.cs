@@ -35,10 +35,10 @@ public static class IdentityServiceExtensions
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
            {
                options.Password.RequiredLength = 10;
-               options.Password.RequireLowercase = false;
-               options.Password.RequireUppercase = false;
-               options.Password.RequireNonAlphanumeric = false;
-               options.Password.RequireDigit = false;
+               options.Password.RequireLowercase = true;
+               options.Password.RequireUppercase = true;
+               options.Password.RequireNonAlphanumeric = true;
+               options.Password.RequireDigit = true;
            })
             .AddEntityFrameworkStores<MuvidsIdentityDbContext>().AddDefaultTokenProviders();
 

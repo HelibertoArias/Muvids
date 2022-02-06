@@ -14,61 +14,115 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
 {
     private readonly IdentityCustomWebApplicationFactory<Program> _factory;
     private readonly ITestOutputHelper _output;
+    private HttpClient _client;
 
     public AccountControllerTest(IdentityCustomWebApplicationFactory<Program> factory, ITestOutputHelper output)
     {
-        this._factory = factory;
-        this._output = output;
+        _factory = factory;
+        _output = output;
+
+        Reset();
     }
 
-    //[Fact]
-    //public async Task Authenticate_Should_Authenticate_An_Existing_User()
-    //{
-    //    var client = _factory.GetAnonymousClient();
+    private void Reset()
+    {
+       
+        _client = _factory.GetAnonymousClient();
+    }
 
-    //    var authenticationRequest = new AuthenticationRequest()
-    //    {
-    //        Email = "helibertoarias@gmail.com",
-    //        Password = "P4ss"
-    //    };
+    [Fact]
+    public async Task Authenticate_Should_Authenticate_An_Existing_User()
+    {
+        // Creatint the user first
+        var registrationRequest = new RegistrationRequest()
+        {
+
+            FirstName = "Heliberto11",
+            LastName = "Arias11",
+            UserName = "helibertoarias11",
+            Email = "helibertoarias11@gmail.com",
+            Password = "P@ssword202"
+        };
+
+        var json = JsonConvert.SerializeObject(registrationRequest);
+
+        await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
+
+        // Autehticate
+        var authenticationRequest = new AuthenticationRequest()
+        {
+             
+            Email = "helibertoarias11@gmail.com",
+            Password = "P@ssword202"
+        };
+     
+
+       json = JsonConvert.SerializeObject(authenticationRequest);
+
+        var response = await _client.PostAsync("/api/account/authenticate", new StringContent(json, Encoding.UTF8, "application/json"));
+
+        var responseString = await response.Content.ReadAsStringAsync();
+
+        var result = JsonConvert.DeserializeObject<RegistrationResponse>(responseString);
+
+        Assert.IsType<RegistrationResponse>(result);
+    }
+
+    [Fact]
+    public async Task Authenticate_Should_Authenticate_An_Existing_User_With_Wrong_Password()
+    {
+        // Creatint the user first
+        var registrationRequest = new RegistrationRequest()
+        {
+
+            FirstName = "Heliberto22",
+            LastName = "Arias22",
+            UserName = "helibertoarias22",
+            Email = "helibertoarias22@gmail.com",
+            Password = "P@ssword202w"
+        };
+
+        var json = JsonConvert.SerializeObject(registrationRequest);
+
+       var resultw =  await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
+
+        // Autehticate
+        var authenticationRequest = new AuthenticationRequest()
+        {
+
+            Email = "helibertoarias22@gmail.com",
+            Password = "P@ssword202"
+        };
 
 
-    //    var response = await client.PostAsJsonAsync("/api/account/authenticate",
-    //                                JsonConvert.SerializeObject(authenticationRequest)
-    //        );
+        json = JsonConvert.SerializeObject(authenticationRequest);
 
-    //    response.EnsureSuccessStatusCode();
+        var response = await _client.PostAsync("/api/account/authenticate", new StringContent(json, Encoding.UTF8, "application/json"));
 
-    //    var responseString = await response.Content.ReadAsStringAsync();
+        var responseString = await response.Content.ReadAsStringAsync();
+       
 
-    //    var result = JsonConvert.DeserializeObject<AuthenticationResponse>(responseString);
-
-    //    Assert.IsType<AuthenticationResponse>(result);
-    //    response.EnsureSuccessStatusCode();
-    //}
-
+        Assert.Equal("Credentials for helibertoarias22@gmail.com aren't valid.", responseString);
+    }
 
     [Fact]
     public async Task Register_Should_Create_New_Username()
     {
-        var client = _factory.GetAnonymousClient();
-
-
         var registrationRequest = new RegistrationRequest()
         {
 
-            FirstName = "Heliberto",
-            LastName = "Arias",
-            UserName = "helibertoarias",
-            Email = "helibertoarias@gmail.com",
-            Password = "P@ssword1"
+            FirstName = "Heliberto33",
+            LastName = "Arias33",
+            UserName = "helibertoarias33",
+            Email = "helibertoarias33@gmail.com",
+            Password = "P@ssword202"
         };
 
 
 
         var json = JsonConvert.SerializeObject(registrationRequest);
 
-        var response = await client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
+        var response = await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
 
         var responseString = await response.Content.ReadAsStringAsync();
 
@@ -82,37 +136,36 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
     public async Task Register_Should_Throw_With_Existing_Email()
     {
         // Arrange
-        var client = _factory.GetAnonymousClient();
-
         var registrationRequest = new RegistrationRequest()
         {
-            FirstName = "Jane",
-            LastName = "Doe",
-            UserName = "janedoe",
-            Email = "janedoe@gmail.com",
-            Password = "P@ssword1"
+            FirstName = "Jane1",
+            LastName = "Doe1",
+            UserName = "janedoe1",
+            Email = "janedoe1@gmail.com",
+            Password = "P@ssword202"
         };
+
 
         var json = JsonConvert.SerializeObject(registrationRequest);
 
-        await client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
+       var r =  await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
 
         // Act
         registrationRequest.UserName = "theJaneDoe";
         json = JsonConvert.SerializeObject(registrationRequest);
 
-        var response = await client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
+        var response = await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
         var responseString = await response.Content.ReadAsStringAsync();
         _output.WriteLine(responseString);
 
-        Assert.Equal("Email janedoe@gmail.com already exists.", responseString);
+        Assert.Equal("Email janedoe1@gmail.com already exists.", responseString);
     }
     
     [Fact]
     public async Task Register_Should_Throw_With_Existing_User()
     {
         // Arrange
-        var client = _factory.GetAnonymousClient();
+       
 
         var registrationRequest = new RegistrationRequest()
         {
@@ -121,15 +174,15 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
             LastName = "Doe",
             UserName = "janedoe",
             Email = "janedoe@gmail.com",
-            Password = "P@ssword1"
+            Password = "P@ssword202"
         };
 
         var json = JsonConvert.SerializeObject(registrationRequest);
 
-        await client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
+        await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
 
         // Act
-        var response = await client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
+        var response = await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
         var responseString = await response.Content.ReadAsStringAsync();
 
         Assert.Equal("Username 'janedoe' already exists.", responseString);
@@ -141,28 +194,22 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
     public async Task Register_Should_Throw_Error_Password_Validation()
     {
         // Arrange
-        var client = _factory.GetAnonymousClient();
 
         var registrationRequest = new RegistrationRequest()
         {
-
-            FirstName = "Jane",
-            LastName = "Doe",
-            UserName = "janedoe",
-            Email = "janedoe@gmail.com",
-            Password = "password"
+            FirstName = "Jane2",
+            LastName = "Doe2",
+            UserName = "janedoe2",
+            Email = "janedoe2@gmail.com",
+            Password = "qweqwewqww"
         };
 
         var json = JsonConvert.SerializeObject(registrationRequest);
- 
+
         // Act
-        var response = await client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
+        var response = await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
         var responseString = await response.Content.ReadAsStringAsync();
-
-
-        var result = JsonConvert.DeserializeObject<ValidationProblemDetails>(responseString);
-      
         // Asert
-        Assert.NotNull(result.Errors["Password"]);
+        Assert.Contains("Failed", responseString);
     }
 }
