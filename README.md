@@ -15,7 +15,7 @@
  
 
 
-
+</div>
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -52,7 +52,9 @@ This is a Web API for handling basic information about movies.
 
 ### Built With
 
-This Web API has build using ASP.NET Core Web API using .NET 6.0. Some of the Nuget Packages used here are:
+This Web API has build using ASP.NET Core Web API using .NET 6.0. This project present an elegant architecture using CQRS combine with Mediator Pattern. Here also will find Unit test and Integration Test project using xUnit.Net. 
+
+Some of the Nuget Packages used here are:
 
 - Entity Framework Core for SQL Server
 - Autommaper
@@ -62,9 +64,8 @@ This Web API has build using ASP.NET Core Web API using .NET 6.0. Some of the Nu
 - Asp.Net Core Authentication
 - Newtonsoft
 - Swashbuckle
-
-
-* 
+- And more..
+ 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -125,7 +126,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Heliberto Arias - [@helibertoarias](https://twitter.com/helibertoarias) - helibertoarias@gmail.com
 
 Project Link: [https://github.com/helibertoarias/Muvids](https://github.com/helibertoarias/muvids)
 
