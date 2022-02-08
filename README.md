@@ -52,11 +52,12 @@ This is a Web API for handling basic information about movies.
 
 ### Built With
 
-This Web API has build using ASP.NET Core Web API using .NET 6.0. This project present an elegant architecture using CQRS combine with Mediator Pattern. Here also will find Unit test and Integration Test project using xUnit.Net. 
+This Web API has build using ASP.NET Core Web API using .NET 6.0. This project presents an elegant architecture using CQRS combine with Mediator Pattern. Here also will find Unit test and Integration Test project using xUnit.Net. 
 
 Some of the Nuget Packages used here are:
 
 - Entity Framework Core for SQL Server
+- Entity Framework Core In-Memory (for Integration Tests)
 - Autommaper
 - Serilog
 - Fluent Validation
@@ -64,7 +65,7 @@ Some of the Nuget Packages used here are:
 - Asp.Net Core Authentication
 - Newtonsoft
 - Swashbuckle
-- And more..
+- xUnit.Net
  
 <p align="right">(<a href="#top">back to top</a>)</p>
 
