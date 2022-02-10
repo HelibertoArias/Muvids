@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Muvids.Application;
 using Muvids.Application.Contracts;
@@ -8,6 +9,7 @@ using Muvids.Identity;
 using Muvids.Identity.Models;
 using Muvids.Infrastructure;
 using Muvids.Persistence;
+using Muvids.Persistence.Data;
 using Muvids.Web.API.Helpers;
 using Muvids.Web.API.Middleware;
 using Muvids.Web.API.Services;
@@ -84,7 +86,7 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(setupAction => // 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddEndpointsApiExplorer();
- 
+
 
 // START Swagger
 // https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio
@@ -145,6 +147,28 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+try
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<MuvidsDbContext>();
+        // Relational-specific methods can only be used when the context is using a relational database provider
+
+        if (context.Database.IsRelational())
+        {
+            context.Database.Migrate();
+            await Seed.SeedMovies(context);
+        }
+    }
+
+}
+catch (Exception ex)
+{
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occured during migration");
+    throw;
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -157,10 +181,10 @@ if (app.Environment.IsDevelopment())
 
     app.UseDeveloperExceptionPage();
 }
- 
-    // https://andrewlock.net/creating-a-custom-error-handler-middleware-function/
-    app.UseCustomExceptionHandler();
- 
+
+// https://andrewlock.net/creating-a-custom-error-handler-middleware-function/
+app.UseCustomExceptionHandler();
+
 
 app.UseHttpsRedirection();
 

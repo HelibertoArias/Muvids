@@ -13,7 +13,7 @@ public class Movie : AuditableEntity
 
     public int ReleaseYear { get; set; }
 
-    public string Rating { get; set; } = null!;
+    public string Language { get; set; } = null!;
 
     public bool IsPublic { get; set; }
 }

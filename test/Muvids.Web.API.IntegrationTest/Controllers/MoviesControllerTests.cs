@@ -33,7 +33,7 @@ public class MoviesControllerTests : IClassFixture<CustomWebApplicationFactory<P
     [Fact]
     public async Task GetAllMovies_Should_Return_One_Record()
     {
-        var client = _factory.GetAnonymousClient();
+        var client = _factory.GeAuthenticatedClient();
 
         var response = await client.GetAsync("/api/movies/all");
 
@@ -53,13 +53,13 @@ public class MoviesControllerTests : IClassFixture<CustomWebApplicationFactory<P
     [Fact]
     public async Task CreateMovie_Should_Return_Movie_Added()
     {
-        var client = _factory.GetAnonymousClient();
+        var client = _factory.GeAuthenticatedClient();
 
         var newMoview = new CreateMovieCommand()
         {
             Description = "It is about ...",
             IsPublic = true,
-            Rating = "PG",
+            Language = "PG",
             ReleaseYear = 2000,
             Title = "Butterfly Effect"
         };
@@ -67,7 +67,7 @@ public class MoviesControllerTests : IClassFixture<CustomWebApplicationFactory<P
         var json = JsonConvert.SerializeObject(newMoview);
 
 
-        var response = await client.PostAsync("/api/movies/createmovie", new StringContent(json, Encoding.UTF8, "application/json"));
+      var response = await client.PostAsync("/api/movies/createmovie", new StringContent(json, Encoding.UTF8, "application/json"));
 
 
 

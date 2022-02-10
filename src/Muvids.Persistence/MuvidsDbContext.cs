@@ -3,6 +3,9 @@ using Muvids.Application.Contracts;
 using Muvids.Domain.Common;
 using Muvids.Domain.Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,9 +32,11 @@ public class MuvidsDbContext : DbContext
         this._loggedInUserService = loggedInUserService ?? throw new ArgumentNullException(nameof(loggedInUserService));
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override async void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(MuvidsDbContext).Assembly);
+
+
 
         //modelBuilder.Entity<Movie>().HasData(
         //    new Movie()

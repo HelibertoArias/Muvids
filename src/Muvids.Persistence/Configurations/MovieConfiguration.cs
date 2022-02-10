@@ -11,8 +11,12 @@ public class MovieConfiguration : IEntityTypeConfiguration<Movie>
         builder.Property(x => x.Id);
         builder.Property(x => x.Title)
             .IsRequired()
-            .HasMaxLength(50);
+            .HasMaxLength(200);
+        builder.Property(x => x.CreatedBy)
+            .IsRequired();
+        builder.Property(x => x.CreatedDate)
+            .IsRequired();
 
-        
+
     }
 }

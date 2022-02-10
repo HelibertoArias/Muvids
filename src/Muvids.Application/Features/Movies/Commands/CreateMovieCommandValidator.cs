@@ -16,7 +16,7 @@ public class CreateMovieCommandValidator : AbstractValidator<CreateMovieCommand>
        
         RuleFor(x => x.Title).NotEmpty();
         
-        RuleFor(x => x.Rating).NotEmpty();
+        RuleFor(x => x.Language).NotEmpty();
        
         RuleFor(x => x.ReleaseYear).GreaterThan(1900);
 
