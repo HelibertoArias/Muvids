@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.TestHost;
 using Muvids.Application.Features.Movies.Commands;
+using Muvids.Application.Features.Movies.Commands.CreateMovie;
 using Muvids.Application.Features.Movies.Queries.GetMoviesList;
 using Muvids.Web.API.IntegrationTest.Base;
 using Newtonsoft.Json;
@@ -26,7 +27,7 @@ public class MoviesControllerTests : IClassFixture<CustomWebApplicationFactory<P
 
         _client = factory.WithWebHostBuilder(builder =>
         {
-             
+
         }).CreateClient();
     }
 
@@ -67,7 +68,7 @@ public class MoviesControllerTests : IClassFixture<CustomWebApplicationFactory<P
         var json = JsonConvert.SerializeObject(newMoview);
 
 
-      var response = await client.PostAsync("/api/movies/createmovie", new StringContent(json, Encoding.UTF8, "application/json"));
+        var response = await client.PostAsync("/api/movies/createmovie", new StringContent(json, Encoding.UTF8, "application/json"));
 
 
 

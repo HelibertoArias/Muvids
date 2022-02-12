@@ -2,24 +2,23 @@
 
 #nullable disable
 
-namespace Muvids.Persistence.Migrations
-{
-    public partial class ChangePropertyRatingInMovie : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.RenameColumn(
-                name: "Rating",
-                table: "Movies",
-                newName: "Language");
-        }
+namespace Muvids.Persistence.Migrations;
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.RenameColumn(
-                name: "Language",
-                table: "Movies",
-                newName: "Rating");
-        }
+public partial class ChangePropertyRatingInMovie : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.RenameColumn(
+            name: "Rating",
+            table: "Movies",
+            newName: "Language");
+    }
+
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.RenameColumn(
+            name: "Language",
+            table: "Movies",
+            newName: "Rating");
     }
 }

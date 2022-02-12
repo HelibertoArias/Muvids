@@ -1,8 +1,9 @@
-﻿namespace Muvids.Application.Features.Movies.Commands;
+﻿using MediatR;
 
-public class CreateMovieDto
+namespace Muvids.Application.Features.Movies.Commands.CreateMovie;
+
+public class CreateMovieCommand : IRequest<CreateMovieCommandResponse>
 {
-    public Guid Id { get; set; }
     public string Description { get; set; } = null!;
 
     public string Title { get; set; } = null!;

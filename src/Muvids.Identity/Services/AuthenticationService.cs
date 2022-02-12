@@ -59,7 +59,7 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<RegistrationResponse> RegisterAsync(RegistrationRequest request)
     {
-        var all =   _userManager.Users.ToList();
+        var all = _userManager.Users.ToList();
         var existingUser = await _userManager.FindByNameAsync(request.UserName);
 
         if (existingUser != null)

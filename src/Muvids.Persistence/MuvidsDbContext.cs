@@ -32,7 +32,7 @@ public class MuvidsDbContext : DbContext
         this._loggedInUserService = loggedInUserService ?? throw new ArgumentNullException(nameof(loggedInUserService));
     }
 
-    protected override async void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(MuvidsDbContext).Assembly);
 

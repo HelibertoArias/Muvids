@@ -24,10 +24,10 @@ public static class PersistenceServiceRegistration
         services.AddDbContext<MuvidsDbContext>(options =>
             options.UseSqlServer(connectionConfiguration)
         );
- 
+
 
         // Base repository
-        services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>)); 
+        services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 
         // Other repositories
         services.AddScoped<IMovieRepository, MovieRepository>();

@@ -27,7 +27,7 @@ public class IdentityCustomWebApplicationFactory<TStartup>
                 d => d.ServiceType ==
                     typeof(DbContextOptions<MuvidsIdentityDbContext>));
 
-            if(descriptor != null)
+            if (descriptor != null)
                 services.Remove(descriptor);
 
             services.AddDbContext<MuvidsIdentityDbContext>(options =>

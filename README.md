@@ -90,19 +90,30 @@ _To start using the application you should._
    ```sh
    git clone https://github.com/helibertoarias/Muvids.git
    ```
-3. Open the solution Muvids.sln and build to restore the Nuget Packages.
-4. Set the project Muvids.Web.API as startup project.
-5. Open the file ./Muvids.Web.API/appsettings.json and update the user and password. This API use two databases, one called Muvids for the application and other called MuvidsIdentity for the users.
+2. Open the solution Muvids.sln and build to restore the Nuget Packages.
+3. Set the project Muvids.Web.API as startup project.
+4. Open the file ./Muvids.Web.API/appsettings.json and update the user and password. This API use two databases, one called Muvids for the application and other called MuvidsIdentity for the users.
     ```json
     "ConnectionStrings": {
       "MuvidsConnectionString": "Server=localhost;Database=Muvids;User Id=<user>;Password=<password>",
       "MuvidsIdentityConnectionString": "Server=localhost;Database=MuvidsIdentity;User Id=<user>;password=<password>" }
      ```
-6. In VS 2020 open a new terminal and create the database for the application and the users.
+5. In VS 2020 open a new terminal and create the database for the application and the users.
     ```cmd
     Update-Database -Context MuvidsDbContext
     Update-Database -Context MuvidsIdentityDbContext
      ```
+6. After this you can run the application. The Swagger page will show up
+ [https://localhost:7098/swagger/index.html](https://localhost:7098/swagger/index.html)
+7. To validate the Web API you need to import the file *Muvids Collection.postman_collection.json* into [POSTMAN](https://www.postman.com/downloads/) and run the test collection. Here some screenshots.
+   - Select the imported file and hit the *Run* button.
+   <img src="images/postman-before-runs-collection.jpg" alt="Logo" width="600" >
+
+   - After a seconds you should the test result all passed
+   <img src="images/postman-after-runs-collection.jpg" alt="Logo" width="600" >
+
+
+ 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 

@@ -1,6 +1,6 @@
-﻿namespace Muvids.Application.Features.Movies.Queries.GetMoviesList;
+﻿namespace Muvids.Application.Features.Movies.Commands.CreateMovie;
 
-public class MovieListVm
+public class CreateMovieDto
 {
     public Guid Id { get; set; }
     public string Description { get; set; } = null!;
@@ -10,4 +10,6 @@ public class MovieListVm
     public int ReleaseYear { get; set; }
 
     public string Language { get; set; } = null!;
+
+    public bool IsPublic { get; set; }
 }

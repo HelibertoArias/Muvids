@@ -16,7 +16,7 @@ public static class CreateFirstUser
             UserName = "helibertoarias",
             Email = "helibertoarias@gmail.com",
             EmailConfirmed = true,
-            
+
         };
 
         var user = await userManager.FindByEmailAsync(applicationUser.Email);

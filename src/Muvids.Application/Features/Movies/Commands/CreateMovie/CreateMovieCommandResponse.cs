@@ -1,6 +1,6 @@
 ﻿using Muvids.Application.Responses;
 
-namespace Muvids.Application.Features.Movies.Commands;
+namespace Muvids.Application.Features.Movies.Commands.CreateMovie;
 
 public class CreateMovieCommandResponse : BaseResponse
 {

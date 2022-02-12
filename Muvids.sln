@@ -12,6 +12,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Muvids.Persistence", "src\Muvids.Persistence\Muvids.Persistence.csproj", "{6B95984B-9B0B-4D25-9E17-1703314A2C95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A86FA5C0-3E93-403D-AFD0-57CFF74F5712}"
+	ProjectSection(SolutionItems) = preProject
+		test\Muvids Collection.postman_collection.json = test\Muvids Collection.postman_collection.json
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{F4A97B28-E8E4-4301-BA1C-5E0F212488A2}"
 EndProject

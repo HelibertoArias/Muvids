@@ -63,7 +63,7 @@ public class CustomWebApplicationFactory<TStartup>
             {
                 options.UseInMemoryDatabase("MuvidsInMemoryDbForTesting");
             });
- 
+
 
             var sp = services.BuildServiceProvider();
 
@@ -101,10 +101,10 @@ public class CustomWebApplicationFactory<TStartup>
 
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            var claims = new[] { new Claim(ClaimTypes.Name, "Test user") , new Claim(ClaimTypes.NameIdentifier, "Jane") };
+            var claims = new[] { new Claim(ClaimTypes.Name, "Test user"), new Claim(ClaimTypes.NameIdentifier, "Jane") };
             var identity = new ClaimsIdentity(claims, DefaultScheme);
             var principal = new ClaimsPrincipal(identity);
-            
+
             var ticket = new AuthenticationTicket(principal, DefaultScheme);
 
             return Task.FromResult(AuthenticateResult.Success(ticket));

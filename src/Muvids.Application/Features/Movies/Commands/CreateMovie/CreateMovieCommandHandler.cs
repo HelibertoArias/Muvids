@@ -3,7 +3,7 @@ using MediatR;
 using Muvids.Application.Contracts.Persistence.Common;
 using Muvids.Domain.Entities;
 
-namespace Muvids.Application.Features.Movies.Commands;
+namespace Muvids.Application.Features.Movies.Commands.CreateMovie;
 
 public class CreateMovieCommandHandler : IRequestHandler<CreateMovieCommand, CreateMovieCommandResponse>
 
@@ -15,8 +15,8 @@ public class CreateMovieCommandHandler : IRequestHandler<CreateMovieCommand, Cre
     public CreateMovieCommandHandler(IMapper mapper,
                                     IAsyncRepository<Movie> movieRepository)
     {
-        this._mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        this._movieRepository = movieRepository ?? throw new ArgumentNullException(nameof(movieRepository));
+        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        _movieRepository = movieRepository ?? throw new ArgumentNullException(nameof(movieRepository));
     }
     public async Task<CreateMovieCommandResponse> Handle(CreateMovieCommand request, CancellationToken cancellationToken)
     {

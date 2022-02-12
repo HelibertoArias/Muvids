@@ -25,5 +25,5 @@ public class BaseResponse
         Message = message;
     }
 
-  
+
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using Muvids.Application.Features.Movies.Commands;
+using Muvids.Application.Features.Movies.Commands.CreateMovie;
+using Muvids.Application.Features.Movies.Commands.UpdateMovie;
 using Muvids.Application.Features.Movies.Queries.GetMoviesList;
 using Muvids.Domain.Entities;
 
@@ -9,10 +10,12 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<Movie,MovieListVm>().ReverseMap();
+        CreateMap<Movie, MovieListVm>().ReverseMap();
 
         CreateMap<Movie, CreateMovieDto>();
         CreateMap<CreateMovieCommand, Movie>();
+
+        CreateMap<UpdateMovieCommand, Movie>();
 
 
         //CreateMap<Event, EventListVm>().ReverseMap();

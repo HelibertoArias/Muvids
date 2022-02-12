@@ -1,9 +1,11 @@
 ﻿using MediatR;
 
-namespace Muvids.Application.Features.Movies.Commands;
+namespace Muvids.Application.Features.Movies.Commands.UpdateMovie;
 
-public class CreateMovieCommand : IRequest<CreateMovieCommandResponse>
+public class UpdateMovieCommand : IRequest
 {
+    public Guid Id { get; set; }
+
     public string Description { get; set; } = null!;
 
     public string Title { get; set; } = null!;

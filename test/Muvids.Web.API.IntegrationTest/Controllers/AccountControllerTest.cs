@@ -26,7 +26,7 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
 
     private void Reset()
     {
-       
+
         _client = _factory.GetAnonymousClient();
     }
 
@@ -51,13 +51,13 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
         // Autehticate
         var authenticationRequest = new AuthenticationRequest()
         {
-             
+
             Email = "helibertoarias11@gmail.com",
             Password = "P@ssword202"
         };
-     
 
-       json = JsonConvert.SerializeObject(authenticationRequest);
+
+        json = JsonConvert.SerializeObject(authenticationRequest);
 
         var response = await _client.PostAsync("/api/account/authenticate", new StringContent(json, Encoding.UTF8, "application/json"));
 
@@ -84,7 +84,7 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
 
         var json = JsonConvert.SerializeObject(registrationRequest);
 
-       var resultw =  await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
+        var resultw = await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
 
         // Autehticate
         var authenticationRequest = new AuthenticationRequest()
@@ -100,7 +100,7 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
         var response = await _client.PostAsync("/api/account/authenticate", new StringContent(json, Encoding.UTF8, "application/json"));
 
         var responseString = await response.Content.ReadAsStringAsync();
-       
+
 
         Assert.Equal("Credentials for helibertoarias22@gmail.com aren't valid.", responseString);
     }
@@ -148,7 +148,7 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
 
         var json = JsonConvert.SerializeObject(registrationRequest);
 
-       var r =  await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
+        var r = await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
 
         // Act
         registrationRequest.UserName = "theJaneDoe";
@@ -160,12 +160,12 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
 
         Assert.Equal("Email janedoe1@gmail.com already exists.", responseString);
     }
-    
+
     [Fact]
     public async Task Register_Should_Throw_With_Existing_User()
     {
         // Arrange
-       
+
 
         var registrationRequest = new RegistrationRequest()
         {

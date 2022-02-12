@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Muvids.Application.Features.Movies.Commands;
+using Muvids.Application.Features.Movies.Commands.CreateMovie;
+using Muvids.Application.Features.Movies.Commands.DeleteMovie;
+using Muvids.Application.Features.Movies.Commands.UpdateMovie;
 using Muvids.Application.Features.Movies.Queries.GetMoviesList;
 
 namespace Muvids.Web.API.Controllers;
@@ -28,12 +30,33 @@ public class MoviesController : ControllerBase
         return Ok(dtos);
     }
 
-    
+
     [HttpPost("createmovie", Name = "Create")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CreateMovieDto))]
-    public async Task<IActionResult> Create([FromBody] CreateMovieCommand data)
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> CreateMovie([FromBody] CreateMovieCommand data)
     {
         var dtos = await _mediator.Send(data);
         return Ok(dtos);
+    }
+
+    [HttpPut("updatemovie", Name = "Update")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> UpdateMovie([FromBody] UpdateMovieCommand data)
+    {
+        await _mediator.Send(data);
+        return NoContent();
+    }
+
+    [HttpPut("deletemovie", Name = "Delete")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> DeleteMovie([FromBody] DeleteMovieCommand data)
+    {
+        await _mediator.Send(data);
+        return NoContent();
     }
 }
