@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Muvids.Application.Contracts.Identity;
 using Muvids.Application.Models.Authentication;
+using Muvids.Identity.Exceptions;
 using Muvids.Identity.Models;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,7 @@ public class AuthenticationService : IAuthenticationService
 
         if (existingUser != null)
         {
-            throw new Exception($"Username '{request.UserName}' already exists.");
+            throw new RegisterUserException($"Username '{request.UserName}' already exists.");
         }
 
         var user = new ApplicationUser
@@ -83,11 +84,11 @@ public class AuthenticationService : IAuthenticationService
             var result = await _userManager.CreateAsync(user, request.Password);
 
             return result.Succeeded ? new RegistrationResponse() { UserId = user.Id }
-                                    : throw new Exception($"{result.ToString()}");
+                                    : throw new RegisterUserException($"{result.ToString()}");
         }
         else
         {
-            throw new Exception($"Email {request.Email } already exists.");
+            throw new RegisterUserException($"Email {request.Email } already exists.");
         }
     }
 

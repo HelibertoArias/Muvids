@@ -7,7 +7,7 @@ using Muvids.Application.Features.Movies.Commands.UpdateMovie;
 using Muvids.Application.Features.Movies.Queries.GetMoviesList;
 
 namespace Muvids.Web.API.Controllers;
-//[Authorize]
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class MoviesController : ControllerBase

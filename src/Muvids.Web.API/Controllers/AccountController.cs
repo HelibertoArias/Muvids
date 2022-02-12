@@ -22,9 +22,13 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("register", Name = "register")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<RegistrationResponse>> Register(RegistrationRequest request)
     {
-        return Ok(await _authenticationService.RegisterAsync(request));
+       
+            var result = await _authenticationService.RegisterAsync(request);
+            return Ok(result);
+        
     }
 
 

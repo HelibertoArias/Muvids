@@ -106,9 +106,10 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement()
                   {
+        
                     {
                       new OpenApiSecurityScheme
-                      {
+                      { 
                         Reference = new OpenApiReference
                           {
                             Type = ReferenceType.SecurityScheme,
@@ -117,6 +118,7 @@ builder.Services.AddSwaggerGen(c =>
                           Scheme = "oauth2",
                           Name = "Bearer",
                           In = ParameterLocation.Header,
+                         
 
                         },
                         new List<string>()

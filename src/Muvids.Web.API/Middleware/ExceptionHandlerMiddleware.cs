@@ -1,4 +1,5 @@
 ﻿using Muvids.Application.Exceptions;
+using Muvids.Identity.Exceptions;
 using Newtonsoft.Json;
 using System.Net;
 
@@ -41,15 +42,20 @@ public class ExceptionHandlerMiddleware
                 break;
             case BadRequestException badRequestException:
                 httpStatusCode = HttpStatusCode.BadRequest;
-                result = badRequestException.Message;
+                //result = badRequestException.Message;
                 break;
             case NotFoundException notFoundException:
                 httpStatusCode = HttpStatusCode.NotFound;
+                break;
+            case RegisterUserException registerUserException:
+                httpStatusCode = HttpStatusCode.BadRequest;
+                
                 break;
             case Exception ex:
                 httpStatusCode = HttpStatusCode.BadRequest;
                 result = ex.Message;
                 break;
+
         }
 
         context.Response.StatusCode = (int)httpStatusCode;
