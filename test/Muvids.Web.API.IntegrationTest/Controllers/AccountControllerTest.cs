@@ -158,14 +158,13 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
         var responseString = await response.Content.ReadAsStringAsync();
         _output.WriteLine(responseString);
 
-        Assert.Equal("Email janedoe1@gmail.com already exists.", responseString);
+        Assert.Contains("Email janedoe1@gmail.com already exists.", responseString);
     }
 
     [Fact]
     public async Task Register_Should_Throw_With_Existing_User()
     {
         // Arrange
-
 
         var registrationRequest = new RegistrationRequest()
         {
@@ -185,7 +184,7 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
         var response = await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
         var responseString = await response.Content.ReadAsStringAsync();
 
-        Assert.Equal("Username 'janedoe' already exists.", responseString);
+        Assert.Contains("Username 'janedoe' already exists.", responseString);
     }
 
 
