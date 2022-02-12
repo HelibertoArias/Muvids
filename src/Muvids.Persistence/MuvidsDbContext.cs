@@ -26,6 +26,7 @@ public class MuvidsDbContext : DbContext
             throw new ArgumentNullException(nameof(options));
         }
 
+ 
         this._loggedInUserService = loggedInUserService ?? throw new ArgumentNullException(nameof(loggedInUserService));
     }
 

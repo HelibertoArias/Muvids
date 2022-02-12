@@ -26,6 +26,7 @@ public class MoviesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MovieListVm>))]
     public async Task<IActionResult> GetAllMovies()
     {
+        _logger.LogWarning("jajaja");
         var dtos = await _mediator.Send(new GetMovieListQuery());
         return Ok(dtos);
     }

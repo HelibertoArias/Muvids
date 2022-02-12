@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Muvids.Application.Contracts;
 using Muvids.Application.Contracts.Persistence.Common;
 using Muvids.Application.Exceptions;
 using Muvids.Domain.Entities;
@@ -13,12 +14,15 @@ public class DeleteMovieCommandHandler : IRequestHandler<DeleteMovieCommand>
 {
     private readonly IMapper _mapper;
     private readonly IAsyncRepository<Movie> _movieRepository;
+    private readonly ILoggedInUserService _loggedInUserService;
 
     public DeleteMovieCommandHandler(IMapper mapper,
-                                    IAsyncRepository<Movie> movieRepository)
+                                     IAsyncRepository<Movie> movieRepository,
+                                     ILoggedInUserService loggedInUserService)
     {
         this._mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         this._movieRepository = movieRepository ?? throw new ArgumentNullException(nameof(movieRepository));
+        this._loggedInUserService = loggedInUserService ?? throw new ArgumentNullException(nameof(loggedInUserService));
     }
 
     public async Task<Unit> Handle(DeleteMovieCommand request, CancellationToken cancellationToken)
@@ -31,6 +35,11 @@ public class DeleteMovieCommandHandler : IRequestHandler<DeleteMovieCommand>
         {
             throw new NotFoundException(nameof(Movie), request.Id);
         } 
+
+        if(movieToDelete.CreatedBy != _loggedInUserService.UserId)
+        {
+            throw new BadRequestException("You can not delete this movie. It belongs to other user.");
+        }
 
         await _movieRepository.DeleteAsync(movieToDelete);
         return Unit.Value;

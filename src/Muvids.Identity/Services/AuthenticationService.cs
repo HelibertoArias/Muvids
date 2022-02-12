@@ -31,6 +31,7 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<AuthenticationResponse> AuthenticateAsync(AuthenticationRequest request)
     {
+
         var user = await _userManager.FindByEmailAsync(request.Email);
 
         if (user == null)

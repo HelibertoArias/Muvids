@@ -106,10 +106,10 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement()
                   {
-        
+
                     {
                       new OpenApiSecurityScheme
-                      { 
+                      {
                         Reference = new OpenApiReference
                           {
                             Type = ReferenceType.SecurityScheme,
@@ -118,7 +118,7 @@ builder.Services.AddSwaggerGen(c =>
                           Scheme = "oauth2",
                           Name = "Bearer",
                           In = ParameterLocation.Header,
-                         
+
 
                         },
                         new List<string>()
@@ -168,7 +168,7 @@ catch (Exception ex)
 {
     var logger = app.Services.GetRequiredService<ILogger<Program>>();
     logger.LogError(ex, "An error occured during migration");
-    throw;
+ 
 }
 
 // Configure the HTTP request pipeline.
@@ -205,6 +205,7 @@ try
 catch (Exception ex)
 {
     Log.Warning(ex, "An error occured while starting the application");
+   
 }
 
 app.Run();
