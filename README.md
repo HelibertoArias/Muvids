@@ -107,10 +107,10 @@ _To start using the application you should._
  [https://localhost:7098/swagger/index.html](https://localhost:7098/swagger/index.html)
 7. To validate the Web API you need to import the file *Muvids Collection.postman_collection.json* into [POSTMAN](https://www.postman.com/downloads/) and run the test collection. Here some screenshots.
    - Select the imported file and hit the *Run* button.
-   <img src="images/postman-before-runs-collection.jpg" alt="Logo" width="600" >
+   <img src="images/postman-before-runs-collection.jpg" alt="Logo" width="900" >
 
    - After a seconds you should the test result all passed
-   <img src="images/postman-after-runs-collection.jpg" alt="Logo" width="600" >
+   <img src="images/postman-after-runs-collection.jpg" alt="Logo" width="900" >
 
 
  
