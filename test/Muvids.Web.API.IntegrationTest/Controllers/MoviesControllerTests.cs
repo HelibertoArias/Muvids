@@ -69,5 +69,53 @@ public class MoviesControllerTests : IClassFixture<CustomWebApplicationFactory<P
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.NotEqual(Guid.Empty, result?.Movie.Id);
     }
+
+    [Fact]
+    public async Task User_Should_Get_Their_Private_Plus_Public_Items()
+    {
+        var client = _factory.GeAuthenticatedClient();
+
+        //Item one
+        var newMoview = new CreateMovieCommand()
+        {
+            Description = "It is about ...",
+            IsPublic = false,
+            Language = "ES-en",
+            ReleaseYear = 2000,
+            Title = "My public movie"
+        };
+
+        var json = JsonConvert.SerializeObject(newMoview);
+
+        var response = await client.PostAsync("/api/movies/createmovie", new StringContent(json, Encoding.UTF8, "application/json"));
+
+        //Item two
+        newMoview = new CreateMovieCommand()
+        {
+            Description = "It is about ...",
+            IsPublic = true,
+            Language = "ES-en",
+            ReleaseYear = 2000,
+            Title = "My Private movie"
+        };
+
+         
+        json = JsonConvert.SerializeObject(newMoview);
+
+
+        response = await client.GetAsync("/api/movies/all");
+
+        // Get list of movies
+        var responseString = await response.Content.ReadAsStringAsync();
+        var result = JsonConvert.DeserializeObject<List<MovieListVm>>(responseString);
+
+
+
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        var totalMoviesToGet = 2;
+        Assert.Equal(totalMoviesToGet, result.Count);
+    }
+
 }
 

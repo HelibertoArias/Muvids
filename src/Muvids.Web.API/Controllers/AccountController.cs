@@ -23,6 +23,7 @@ public class AccountController : ControllerBase
 
     [HttpPost("register", Name = "register")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
     public async Task<ActionResult<RegistrationResponse>> Register(RegistrationRequest request)
     {
        

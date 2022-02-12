@@ -62,7 +62,7 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(setupAction => // 
             (context is ControllerContext ||
              actionExecutingContext?.ActionArguments.Count == context.ActionDescriptor.Parameters.Count))
         {
-            problemDetails.Type = "https://courselibrary.com/modelvalidationproblem";
+            //problemDetails.Type = "https://courselibrary.com/modelvalidationproblem";
             problemDetails.Status = StatusCodes.Status422UnprocessableEntity;
             problemDetails.Title = "One or more validation errors occurred.";
 

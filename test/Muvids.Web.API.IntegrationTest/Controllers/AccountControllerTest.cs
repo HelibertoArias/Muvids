@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Muvids.Application.Models.Authentication;
 using Muvids.Web.API.IntegrationTest.Base.Identity;
+using Muvids.Web.API.IntegrationTest.Controllers.Data;
 using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +28,23 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
 
     private void Reset()
     {
-
         _client = _factory.GetAnonymousClient();
     }
+
+    [Theory]
+    [RegistrationRequestData]
+    public async Task Authenticate_Should_Validate(RegistrationRequest input,  HttpStatusCode expectedStatusCode )
+    {
+        var json = JsonConvert.SerializeObject(input);
+
+        var response = await _client.PostAsync("/api/account/register", new StringContent(json, Encoding.UTF8, "application/json"));
+ 
+        var responseString = await response.Content.ReadAsStringAsync();
+        _output.WriteLine(responseString);
+        Assert.Equal(expectedStatusCode, response.StatusCode);
+    }
+
+
 
     [Fact]
     public async Task Authenticate_Should_Authenticate_An_Existing_User()
@@ -133,7 +149,7 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
     }
 
     [Fact]
-    public async Task Register_Should_Throw_With_Existing_Email()
+    public async Task Register_Should_Throw_Error_With_Existing_Email()
     {
         // Arrange
         var registrationRequest = new RegistrationRequest()
@@ -158,6 +174,7 @@ public class AccountControllerTest : IClassFixture<IdentityCustomWebApplicationF
         var responseString = await response.Content.ReadAsStringAsync();
         _output.WriteLine(responseString);
 
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         Assert.Contains("Email janedoe1@gmail.com already exists.", responseString);
     }
 
