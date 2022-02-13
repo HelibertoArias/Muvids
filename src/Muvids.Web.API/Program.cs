@@ -19,7 +19,8 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddSerilog();
-
+// Add services to the container.
+builder.Services.AddHttpClient();
 IConfiguration configuration = builder.Configuration;
 
 // Add services to the container.
