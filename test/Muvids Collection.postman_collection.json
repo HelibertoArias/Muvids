@@ -276,13 +276,23 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/movies/all",
+					"raw": "{{host}}/movies/all?pageNumber=1&pageSize=10",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"movies",
 						"all"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
 					]
 				}
 			},
@@ -363,23 +373,7 @@
 		{
 			"key": "host",
 			"value": "https://localhost:7098/api",
-			"type": "string",
-			"disabled": true
-		},
-		{
-			"key": "token",
-			"value": "",
-			"disabled": true
-		},
-		{
-			"key": "username",
-			"value": "",
-			"disabled": true
-		},
-		{
-			"key": "email",
-			"value": "",
-			"disabled": true
+			"type": "string"
 		},
 		{
 			"key": "host",
