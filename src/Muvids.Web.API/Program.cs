@@ -10,6 +10,7 @@ using Muvids.Identity.Models;
 using Muvids.Infrastructure;
 using Muvids.Persistence;
 using Muvids.Persistence.Data;
+using Muvids.Web.API.Configurations;
 using Muvids.Web.API.Helpers;
 using Muvids.Web.API.Middleware;
 using Muvids.Web.API.Services;
@@ -26,6 +27,9 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(configuration);
 builder.Services.AddPersistenceServices(configuration);
 builder.Services.AddIdentityServices(configuration);
+
+builder.Services.Configure<GeneralSettings>(configuration.GetSection("GeneralSettings"));
+
 
 builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
 
