@@ -27,7 +27,7 @@ public class BaseRepository<T> : IAsyncRepository<T> where T : class
         return await _dbContext.Set<T>().ToListAsync();
     }
 
-    
+
 
     public async virtual Task<IReadOnlyList<T>> GetPagedReponseAsync(int page, int size)
     {

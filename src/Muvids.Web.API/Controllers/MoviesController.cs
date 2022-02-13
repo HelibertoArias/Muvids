@@ -24,10 +24,9 @@ public class MoviesController : ControllerBase
 
     [HttpGet("all", Name = "GetAllMovies")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MovieListVm>))]
-    public async Task<IActionResult> GetAllMovies()
+    public async Task<IActionResult> GetAllMovies([FromQuery] GetMovieListQuery movieListQuery)
     {
-        _logger.LogWarning("jajaja");
-        var dtos = await _mediator.Send(new GetMovieListQuery());
+        var dtos = await _mediator.Send(movieListQuery);
         return Ok(dtos);
     }
 

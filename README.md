@@ -121,7 +121,7 @@ _To start using the application you should._
    <br />
    <img src="images/postman-after-runs-collection.jpg" alt="Logo" width="900" >
 
-8. An extra end point was add in order to provide a random number provided for an external services. You can access from this URL [https://localhost:7098/api/Random/getrandom](https://localhost:7098/api/Random/getrandom)
+8. An extra end point was added in order to provide a random number from an external web service. You can access from this URL [https://localhost:7098/api/Random/getrandom](https://localhost:7098/api/Random/getrandom)
  
 <p align="right">(<a href="#top">back to top</a>)</p>
 
