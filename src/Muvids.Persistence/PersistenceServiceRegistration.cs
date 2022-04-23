@@ -2,9 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Muvids.Application.Contracts.Persistence;
-using Muvids.Application.Contracts.Persistence.Common;
 using Muvids.Persistence.Repositories;
-using Muvids.Persistence.Repositories.Common;
 using System;
 
 namespace Muvids.Persistence;
@@ -27,7 +25,7 @@ public static class PersistenceServiceRegistration
 
 
         // Base repository
-        services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
+        //services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 
         // Other repositories
         services.AddScoped<IMovieRepository, MovieRepository>();

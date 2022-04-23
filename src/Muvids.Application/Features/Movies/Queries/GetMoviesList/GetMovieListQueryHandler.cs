@@ -1,20 +1,18 @@
 ﻿using AutoMapper;
 using MediatR;
 using Muvids.Application.Contracts;
-using Muvids.Application.Contracts.Persistence.Common;
-using Muvids.Domain.Entities;
+using Muvids.Application.Contracts.Persistence;
 
 namespace Muvids.Application.Features.Movies.Queries.GetMoviesList;
 
 public class GetMovieListQueryHandler : IRequestHandler<GetMovieListQuery, List<MovieListVm>>
 {
     private readonly IMapper _mapper;
-
-    private readonly IAsyncRepository<Movie> _movieRepository;
+    private readonly IMovieRepository _movieRepository;
     private readonly ILoggedInUserService _loggedInUserService;
 
     public GetMovieListQueryHandler(IMapper mapper,
-                                    IAsyncRepository<Movie> movieRepository,
+                                    IMovieRepository movieRepository,
                                     ILoggedInUserService loggedInUserService)
     {
         this._mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -22,17 +20,15 @@ public class GetMovieListQueryHandler : IRequestHandler<GetMovieListQuery, List<
         this._loggedInUserService = loggedInUserService;
     }
 
-    public async Task<List<MovieListVm>> Handle(GetMovieListQuery request,
-                                                        CancellationToken cancellationToken)
+    public async Task<List<MovieListVm>> Handle(GetMovieListQuery request, CancellationToken cancellationToken)
     {
 
         var eventsFiltered = (await _movieRepository.GetPagedReponseAsync(request.PageNumber, request.PageSize))
-                                .ToList() // TODO
+                                .ToList()
                                 .Where(x => x.IsPublic || x.CreatedBy == _loggedInUserService.UserId)
                                 .OrderBy(x => x.Title);
 
 
-        
         return _mapper.Map<List<MovieListVm>>(eventsFiltered);
     }
 }

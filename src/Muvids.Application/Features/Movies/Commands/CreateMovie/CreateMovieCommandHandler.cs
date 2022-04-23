@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using Muvids.Application.Contracts.Persistence.Common;
+using Muvids.Application.Contracts.Persistence;
 using Muvids.Domain.Entities;
 
 namespace Muvids.Application.Features.Movies.Commands.CreateMovie;
@@ -10,10 +10,10 @@ public class CreateMovieCommandHandler : IRequestHandler<CreateMovieCommand, Cre
 {
     private readonly IMapper _mapper;
 
-    private readonly IAsyncRepository<Movie> _movieRepository;
+    private readonly IMovieRepository _movieRepository;
 
     public CreateMovieCommandHandler(IMapper mapper,
-                                    IAsyncRepository<Movie> movieRepository)
+                                    IMovieRepository movieRepository)
     {
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         _movieRepository = movieRepository ?? throw new ArgumentNullException(nameof(movieRepository));

@@ -30,7 +30,7 @@ public class MoviesController : ControllerBase
         return Ok(dtos);
     }
 
-
+    // Get started with Swashbuckle : https://bit.ly/34Vs4jF
     [HttpPost("createmovie", Name = "Create")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CreateMovieDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -50,7 +50,7 @@ public class MoviesController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("deletemovie", Name = "Delete")]
+    [HttpDelete("deletemovie", Name = "Delete")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

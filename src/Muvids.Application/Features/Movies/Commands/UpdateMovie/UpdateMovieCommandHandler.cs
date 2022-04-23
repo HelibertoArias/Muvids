@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Muvids.Application.Contracts;
-using Muvids.Application.Contracts.Persistence.Common;
+using Muvids.Application.Contracts.Persistence;
 using Muvids.Application.Exceptions;
 using Muvids.Domain.Entities;
 
@@ -10,11 +10,11 @@ namespace Muvids.Application.Features.Movies.Commands.UpdateMovie;
 public class UpdateMovieCommandHandler : IRequestHandler<UpdateMovieCommand>
 {
     private readonly IMapper _mapper;
-    private readonly IAsyncRepository<Movie> _movieRepository;
+    private readonly IMovieRepository _movieRepository;
     private readonly ILoggedInUserService _loggedInUserService;
 
     public UpdateMovieCommandHandler(IMapper mapper,
-                                    IAsyncRepository<Movie> movieRepository,
+                                    IMovieRepository movieRepository,
                                     ILoggedInUserService loggedInUserService)
     {
         this._mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
